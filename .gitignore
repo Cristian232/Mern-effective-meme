@@ -1,4 +1,5 @@
 client/node_modules
+node_modules
 client/src/assets/favicon_io
 client/src/assets-pile-tobediscarded
 client/dist
@@ -18,6 +19,7 @@ lerna-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+.idea/httpRequests
 .DS_Store
 *.suo
 *.ntvs*
@@ -25,4 +27,5 @@ lerna-debug.log*
 *.sln
 *.sw?
 *.idea
+.env
 
