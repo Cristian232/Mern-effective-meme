@@ -25,4 +25,4 @@ lerna-debug.log*
 *.sln
 *.sw?
 *.idea
-./.idea
+
