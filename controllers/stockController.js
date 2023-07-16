@@ -11,14 +11,9 @@ export const getAllStocks = async (req, res) => {
 }
 
 export const createStock = async (req, res) => {
-    try {
         const {company, ceo} = req.body;
         const stock = await Stock.create({company, ceo})
         res.status(201).json({stock})
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({msg: "Server Error"})
-    }
 }
 
 
