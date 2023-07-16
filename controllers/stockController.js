@@ -1,15 +1,16 @@
 import {nanoid} from "nanoid";
 import Stock from "../models/StockModel.js"
+import {StatusCodes} from "http-status-codes";
 
 export const getAllStocks = async (req, res) => {
     const stocks = await Stock.find({})
-    res.status(200).json({stocks})
+    res.status(StatusCodes.OK).json({stocks})
 }
 
 export const createStock = async (req, res) => {
         const {company, ceo} = req.body;
         const stock = await Stock.create({company, ceo})
-        res.status(201).json({stock})
+        res.status(StatusCodes.CREATED).json({stock})
 }
 
 export const getStock = async (req, res) => {
@@ -18,7 +19,7 @@ export const getStock = async (req, res) => {
     if (!stock) {
         return res.status(404).json({msg: `No such stock found ${id}`});
     }
-    res.status(200).json(stock)
+    res.status(StatusCodes.OK).json(stock)
 }
 
 export const updateStock = async (req, res) => {
@@ -31,7 +32,7 @@ export const updateStock = async (req, res) => {
     }
     stock.ceo = ceo;
     stock.company = company;
-    res.status(200).json({msg: "Stock modified", stocks: updatedStock})
+    res.status(StatusCodes.OK).json({msg: "Stock modified", stocks: updatedStock})
 }
 
 export const deleteStock = async (req, res) => {
@@ -40,5 +41,5 @@ export const deleteStock = async (req, res) => {
     if (!removedStock) {
         return res.status(404).json({msg: `No company with ${id} found`})
     }
-    res.status(200).json({msg: "Stock deleted", stocks: removedStock})
+    res.status(StatusCodes.OK).json({msg: "Stock deleted", stocks: removedStock})
 }
