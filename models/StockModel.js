@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {COMPANY_TYPE, STOCK_STATUS} from "../utils/constants.js";
 
 
 const StockSchema = new mongoose.Schema({
@@ -6,13 +7,13 @@ const StockSchema = new mongoose.Schema({
     ceo : String,
     stockStatus : {
         type : String,
-        enum : ["available","not-available","in-progress"],
-        default : "in-progress"
+        enum : Object.values(STOCK_STATUS),
+        default : STOCK_STATUS.IN_PROGRESS
     },
     companyType : {
         type : String,
-        enum : ["Software","Hardware","Cloud"],
-        default : "Software"
+        enum : Object.values(COMPANY_TYPE),
+        default : COMPANY_TYPE.SOFTWARE
     },
     companyLocation : {
         type : String,

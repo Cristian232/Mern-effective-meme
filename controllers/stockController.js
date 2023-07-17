@@ -8,17 +8,14 @@ export const getAllStocks = async (req, res) => {
 }
 
 export const createStock = async (req, res) => {
-        const {company, ceo} = req.body;
-        const stock = await Stock.create({company, ceo})
+        const {company, ceo, stockStatus, companyType, companyLocation} = req.body;
+        const stock = await Stock.create({company, ceo, stockStatus, companyType, companyLocation })
         res.status(StatusCodes.CREATED).json({stock})
 }
 
 export const getStock = async (req, res) => {
     const {id} = req.params;
     const stock = await Stock.findById(id);
-    if (!stock) {
-        throw new NotFoundError(`No stock with ${id} found`)
-    }
     res.status(StatusCodes.OK).json(stock)
 }
 
@@ -27,17 +24,11 @@ export const updateStock = async (req, res) => {
     const updatedStock = await Stock.findByIdAndUpdate(id,req.body, {
         new: true
     })
-    if (!updatedStock) {
-        throw new NotFoundError(`No stock with ${id} found`)
-    }
     res.status(StatusCodes.OK).json({msg: "Stock modified", stocks: updatedStock})
 }
 
 export const deleteStock = async (req, res) => {
     const {id} = req.params
     const removedStock = await Stock.findByIdAndDelete(id)
-    if (!removedStock) {
-        throw new NotFoundError(`No stock with ${id} found`)
-    }
     res.status(StatusCodes.OK).json({msg: "Stock deleted", stocks: removedStock})
 }
