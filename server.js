@@ -2,13 +2,11 @@ import "express-async-errors"
 import express from "express"
 import morgan from "morgan";
 import * as dotenv from "dotenv";
-dotenv.config()
-
-const app = express()
-
 import stockRouter from "./routes/stockRouter.js";
 import mongoose from "mongoose";
-
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+dotenv.config()
+const app = express()
 
 if (process.env.NODE_ENV === "development"){
 app.use(morgan('dev'))
@@ -27,10 +25,7 @@ app.use("*", (req,res) => {
     res.status(404).json({msg: "Not found"})
 })
 
-app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).json({msg: "Server issues, sry"})
-})
+app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 5100
 

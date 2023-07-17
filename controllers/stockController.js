@@ -1,6 +1,6 @@
-import {nanoid} from "nanoid";
 import Stock from "../models/StockModel.js"
 import {StatusCodes} from "http-status-codes";
+import {NotFoundError} from "../errors/customErrors.js";
 
 export const getAllStocks = async (req, res) => {
     const stocks = await Stock.find({})
@@ -17,7 +17,7 @@ export const getStock = async (req, res) => {
     const {id} = req.params;
     const stock = await Stock.findById(id);
     if (!stock) {
-        return res.status(404).json({msg: `No such stock found ${id}`});
+        throw new NotFoundError(`No stock with ${id} found`)
     }
     res.status(StatusCodes.OK).json(stock)
 }
@@ -28,10 +28,8 @@ export const updateStock = async (req, res) => {
         new: true
     })
     if (!updatedStock) {
-        return res.status(404).json({msg: `No company with ${id} found`})
+        throw new NotFoundError(`No stock with ${id} found`)
     }
-    stock.ceo = ceo;
-    stock.company = company;
     res.status(StatusCodes.OK).json({msg: "Stock modified", stocks: updatedStock})
 }
 
@@ -39,7 +37,7 @@ export const deleteStock = async (req, res) => {
     const {id} = req.params
     const removedStock = await Stock.findByIdAndDelete(id)
     if (!removedStock) {
-        return res.status(404).json({msg: `No company with ${id} found`})
+        throw new NotFoundError(`No stock with ${id} found`)
     }
     res.status(StatusCodes.OK).json({msg: "Stock deleted", stocks: removedStock})
 }
