@@ -3,6 +3,7 @@ import express from "express"
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import stockRouter from "./routes/stockRouter.js";
+import authRouter from "./routes/authRouter.js";
 import mongoose from "mongoose";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/v1/stocks", stockRouter)
+app.use("/api/v1/auth", authRouter)
 
 app.use("*", (req, res) => {
     res.status(404).json({msg: "Not found"})

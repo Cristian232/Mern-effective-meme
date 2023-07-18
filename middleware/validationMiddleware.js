@@ -3,6 +3,7 @@ import {BadRequestError, NotFoundError} from "../errors/customErrors.js";
 import {COMPANY_TYPE, STOCK_STATUS} from "../utils/constants.js";
 import mongoose from "mongoose";
 import Stock from "../models/StockModel.js";
+import User from "../models/UserModel.js"
 
 const withValidationErrors = (validateValues) => {
     return [
@@ -39,6 +40,35 @@ export const validateIdParam = withValidationErrors([
             if (!stock) throw new NotFoundError(`No Stock with id ${value} found`)
         })
 
+])
+
+export const validateRegisterInput = withValidationErrors([
+    body("name").notEmpty().withMessage("Name is Required"),
+    body("lastName").notEmpty().withMessage("Last name is Required"),
+    body("email")
+        .notEmpty()
+        .withMessage("Email is Required")
+        .isEmail()
+        .withMessage("Invalid email format")
+        .custom(async (email) => {
+            const user = await User.findOne({email})
+            if (user) throw new BadRequestError('Email already exist')
+        }),
+    body("password")
+        .notEmpty()
+        .withMessage("Password is Required")
+        .isLength({min:8})
+        .withMessage("Password must be at least 8 chars long"),
+    body("location").notEmpty().withMessage("Location is Required")
+])
+
+export const validateLoginInput = withValidationErrors([
+    body('email')
+        .notEmpty()
+        .withMessage("Email input is required")
+        .isEmail()
+        .withMessage("Valid email required"),
+    body("password").notEmpty().withMessage("Password is required")
 ])
 
 // export const validateTest = withValidationErrors([
