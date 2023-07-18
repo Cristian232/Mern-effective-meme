@@ -18,6 +18,10 @@ const StockSchema = new mongoose.Schema({
     companyLocation : {
         type : String,
         default : "Location to be updated shortly"
+    },
+    createdBy: {
+        type : mongoose.Types.ObjectId,
+        ref : "User"
     }
 }, {timestamps : true})
 
