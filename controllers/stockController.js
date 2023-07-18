@@ -1,15 +1,15 @@
 import Stock from "../models/StockModel.js"
 import {StatusCodes} from "http-status-codes";
-import {NotFoundError} from "../errors/customErrors.js";
 
 export const getAllStocks = async (req, res) => {
-    const stocks = await Stock.find({})
+    console.log(req.user)
+    const stocks = await Stock.find({createdBy: req.user.userId})
     res.status(StatusCodes.OK).json({stocks})
 }
 
 export const createStock = async (req, res) => {
-        const {company, ceo, stockStatus, companyType, companyLocation} = req.body;
-        const stock = await Stock.create({company, ceo, stockStatus, companyType, companyLocation })
+        req.body.createdBy = req.user.userId
+        const stock = await Stock.create(req.body)
         res.status(StatusCodes.CREATED).json({stock})
 }
 

@@ -4,10 +4,10 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 import stockRouter from "./routes/stockRouter.js";
 import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js";
 import mongoose from "mongoose";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import {authenticateUser} from "./middleware/authMiddleware.js";
-import {cookie} from "express-validator";
 import cookieParser from "cookie-parser";
 
 dotenv.config()
@@ -25,7 +25,9 @@ app.get("/", (req, res) => {
     res.json({message: "Here on get request :)", data: req.body})
 })
 
+
 app.use("/api/v1/stocks", authenticateUser, stockRouter)
+app.use("/api/v1/users", authenticateUser, userRouter)
 app.use("/api/v1/auth", authRouter)
 
 app.use("*", (req, res) => {

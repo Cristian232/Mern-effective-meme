@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "setup-project": "npm i && cd client && npm i",
-    "dev": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "cd client && npm run dev",
     "watch": "node --watch server.js"
   },
   "author": "CristiFlr",
