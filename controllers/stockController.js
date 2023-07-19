@@ -16,7 +16,7 @@ export const createStock = async (req, res) => {
 export const getStock = async (req, res) => {
     const {id} = req.params;
     const stock = await Stock.findById(id);
-    res.status(StatusCodes.OK).json(stock)
+    res.status(StatusCodes.OK).json({stock})
 }
 
 export const updateStock = async (req, res) => {
