@@ -6,7 +6,7 @@ import Stock from "../models/StockModel.js"
 export const getCurrentUser = async (req, res) => {
     const user = await User.findOne({_id: req.user.userId})
     const userWithNoPass = user.toJSON()
-    res.status(StatusCodes.OK).json(userWithNoPass)
+    res.status(StatusCodes.OK).json({user:userWithNoPass})
 }
 export const getApplicationStats = async (req, res) => {
     const users = await User.countDocuments()

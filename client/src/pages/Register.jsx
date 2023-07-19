@@ -1,17 +1,27 @@
 import {useState} from "react";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import {FormRow, Logo} from "../components/index.js";
-import {Link} from "react-router-dom";
+import {Form, Link, redirect, useNavigation} from "react-router-dom";
+import customFetch from "../utils/customFetch.js";
+import {toast} from "react-toastify";
 
-const initialState = {
-    name: '',
-    email: '',
-    password: '',
-    isMember: true
+export const action = async ({request}) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData)
+    try {
+        await customFetch.post("/auth/register",data)
+        toast.success("Registration Successful")
+        return redirect("/login")
+    } catch (err) {
+    toast.error(err?.response?.data?.msg)
+    return err
+    }
 }
-
 const Register = () => {
-    const [values, setValues] = useState(initialState)
+    const navigation = useNavigation()
+    console.log(navigation)
+    const isSubmitting = navigation.state === "submitting"
+
     const handleChange = (e) => {
         console.log(e.target)
     }
@@ -22,16 +32,16 @@ const Register = () => {
 
     return (
         <Wrapper>
-            <form method='post' className='form'>
+            <Form method='post' className='form'>
                 <Logo />
                 <h3>Register</h3>
                 <FormRow type='text' name='name' defaultValue={"John"}/>
                 <FormRow type='text' name='lastName' labelText='last name' defaultValue={"Smith"}/>
                 <FormRow type='text' name='location' defaultValue={"Europe"}/>
                 <FormRow type='email' name='email' defaultValue={"no@noemail.com"}/>
-                <FormRow type='password' name='password' defaultValue={"abc"}/>
-                <button type={"submit"} className={"btn btn-block"}>
-                    submit
+                <FormRow type='password' name='password' defaultValue={"aaaabbbb"}/>
+                <button type={"submit"} className={"btn btn-block"} disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting... " : "Submit"}
                 </button>
                 <p>
                     Already a member?
@@ -39,7 +49,7 @@ const Register = () => {
                         Login
                     </Link>
                 </p>
-            </form>
+            </Form>
         </Wrapper>
     );
 };
