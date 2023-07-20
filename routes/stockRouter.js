@@ -6,10 +6,11 @@ import {
     validateIdParam,
     validateStockInput
 } from "../middleware/validationMiddleware.js";
+import {checkForTestUser} from "../middleware/authMiddleware.js";
 
 // router.get("/", getAllStocks)
 
-router.route("/").get(getAllStocks).post(validateStockInput,createStock)
-router.route("/:id").get(validateIdParam,getStock).patch(validateStockInput,validateIdParam,updateStock).delete(validateIdParam,deleteStock)
+router.route("/").get(getAllStocks).post(checkForTestUser, validateStockInput, createStock)
+router.route("/:id").get(validateIdParam,getStock).patch(checkForTestUser, validateStockInput,validateIdParam,updateStock).delete(checkForTestUser, validateIdParam,deleteStock)
 
 export default router;

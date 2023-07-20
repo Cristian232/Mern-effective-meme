@@ -5,7 +5,7 @@ import {
     useOutletContext
 } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage.js";
-import {FormRow} from "../components/index.js";
+import {FormRow, SubmitBtn} from "../components/index.js";
 import {COMPANY_TYPE, STOCK_STATUS} from "../../../utils/constants.js";
 import customFetch from "../utils/customFetch.js";
 import {toast} from "react-toastify";
@@ -26,8 +26,6 @@ export const action = async ({request}) => {
 
 const AddStock = () => {
     const {user} = useOutletContext()
-    const navigation = useNavigation()
-    const isSubmitting = navigation.state === "submitting"
     return (
         <Wrapper>
             <Form method={"post"} className={"form"}>
@@ -74,9 +72,7 @@ const AddStock = () => {
                         </select>
                     </div>
                     <FormRow type={"text"} name={"companyLocation"}/>
-                    <button type={"submit"} className={"btn btn-block form-btn"} disabled={isSubmitting}>
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                    </button>
+                    <SubmitBtn formBtn />
                 </div>
             </Form>
         </Wrapper>

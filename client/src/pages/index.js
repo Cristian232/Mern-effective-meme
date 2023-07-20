@@ -6,5 +6,6 @@ import HomeLayout from "./HomeLayout.jsx";
 import Login from "./Login.jsx";
 import AddStock from "./AddStock.jsx";
 import EditStock from "./EditStock.jsx";
+import Profile from "./Profile.jsx";
 
-export {DashboardLayout, Register, Error, Landing, HomeLayout, Login, AddStock, EditStock}
+export {DashboardLayout, Register, Error, Landing, HomeLayout, Login, AddStock, EditStock, Profile}

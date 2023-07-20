@@ -12,6 +12,7 @@ import Stock from "./Stock.jsx";
 import StockInfo from "./StockInfo.jsx";
 import FormRowSelect from "./FormRowSelect.jsx";
 import StatItem from "./StatItem.jsx";
+import SubmitBtn from "./SubmitBtn.jsx";
 
 export {
     Logo,
@@ -27,5 +28,6 @@ export {
     Stock,
     StockInfo,
     FormRowSelect,
-    StatItem
+    StatItem,
+    SubmitBtn
 };

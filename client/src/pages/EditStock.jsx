@@ -7,7 +7,7 @@ import {
 import customFetch from "../utils/customFetch.js";
 import {toast} from "react-toastify";
 import Wrapper from "../assets/wrappers/DashboardFormPage.js";
-import {FormRow, FormRowSelect} from "../components/index.js";
+import {FormRow, FormRowSelect, SubmitBtn} from "../components/index.js";
 import {COMPANY_TYPE, STOCK_STATUS} from "../../../utils/constants.js";
 
 export const loader = async ({params}) => {
@@ -33,8 +33,6 @@ export const action = async ({request, params}) => {
     }
 }
 const EditStock = () => {
-    const navigation = useNavigation()
-    const isSubmitting = navigation.state === "submitting"
     const {stock} = useLoaderData()
     return (
         <Wrapper>
@@ -56,9 +54,7 @@ const EditStock = () => {
                             list={Object.values(COMPANY_TYPE)}
                         />
                     <FormRow type={"text"} name={"companyLocation"} defaultValue={stock.companyLocation} labelText={"companyLocation"}/>
-                    <button type={"submit"} className={"btn btn-block form-btn"} disabled={isSubmitting}>
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                    </button>
+                    <SubmitBtn formBtn/>
                 </div>
             </Form>
         </Wrapper>

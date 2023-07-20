@@ -1,4 +1,5 @@
 import {
+    BadRequestError,
     UnauthenticatedError,
     UnauthorizedError
 } from "../errors/customErrors.js";
@@ -9,7 +10,8 @@ export const authenticateUser = (req,res,next)=>{
     if (!token) throw new UnauthenticatedError('Invalid authentication')
     try {
         const {userId, role} = verifyJWT(token)
-        req.user = {userId, role}
+        const testUser = userId === "64b88fc6a1fc0b5be9986628"
+        req.user = {userId, role, testUser}
     next()
     } catch (err) {
         throw new UnauthenticatedError('Invalid authentication')
@@ -23,4 +25,9 @@ export const authorizePermissions = (...roles) => {
     }
     next();
     }
+}
+
+export const checkForTestUser = (req, res, next) => {
+    if (req.user.testUser) throw new BadRequestError("Demo user only")
+    next()
 }

@@ -7,11 +7,13 @@ import {action as addAction} from "./pages/AddStock.jsx";
 import {loader as dashboardLoader} from "./pages/DashboardLayout.jsx";
 import {action as editStockAction} from "./pages/EditStock.jsx";
 import {action as deleteStockAction} from "./pages/DeleteStock.jsx";
+import {action as profileAction} from "./pages/Profile.jsx";
 import {loader as editStockLoader} from "./pages/EditStock.jsx";
 import Admin, {loader as adminLoader} from "./pages/Admin.jsx";
 import {loader as allStocksLoader} from "./components/AllStocks.jsx";
-import {AddStock, EditStock, DashboardLayout, Error, Register, Landing, HomeLayout, Login} from "./pages/index.js";
+import {AddStock, EditStock, DashboardLayout, Error, Register, Landing, HomeLayout, Login, Profile} from "./pages/index.js";
 import {AllStocks} from "./components/index.js";
+
 
 
 const checkDefaultTheme = () => {
@@ -32,13 +34,15 @@ const router = createBrowserRouter([{
         loader: dashboardLoader,
         children: [
             {index: true, element: <AddStock/>, action: addAction},
-            {path: "all-stocks", element: <AllStocks/>, loader: allStocksLoader
-        }, {
-            path: "edit-stock/:id",
-            element: <EditStock/>,
-            loader: editStockLoader,
-            action: editStockAction
-        }, {path: "delete-stock/:id", action: deleteStockAction}, {path: "admin", element: <Admin />, loader: adminLoader}]
+            {path: "all-stocks", element: <AllStocks/>, loader: allStocksLoader},
+            {path: "edit-stock/:id",
+                element: <EditStock/>,
+                loader: editStockLoader,
+                action: editStockAction},
+            {path: "delete-stock/:id", action: deleteStockAction},
+            {path: "admin", element: <Admin />, loader: adminLoader},
+            {path: "profile", element: <Profile/>, action: profileAction}
+        ]
     }, {
         path: "register", element: <Register/>, action: registerAction
     }, {
