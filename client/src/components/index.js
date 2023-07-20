@@ -13,6 +13,11 @@ import StockInfo from "./StockInfo.jsx";
 import FormRowSelect from "./FormRowSelect.jsx";
 import StatItem from "./StatItem.jsx";
 import SubmitBtn from "./SubmitBtn.jsx";
+import AreaChart from "./AreaChart.jsx";
+import BarChart from "./BarChart.jsx";
+import ChartsContainer from "./ChartsContainer.jsx";
+import StatsContainer from "./StatsContainer.jsx";
+import ErrorElement from "./ErrorElement.jsx";
 
 export {
     Logo,
@@ -29,5 +34,10 @@ export {
     StockInfo,
     FormRowSelect,
     StatItem,
-    SubmitBtn
+    SubmitBtn,
+    AreaChart,
+    BarChart,
+    StatsContainer,
+    ChartsContainer,
+    ErrorElement
 };

@@ -19,7 +19,7 @@ const AllStocks = () => {
     const {data} = useLoaderData()
     return (
         <AllStocksContext.Provider value={{data}}>
-            <SearchContainer />
+            {/*<SearchContainer />*/}
             <StocksContainer />
         </AllStocksContext.Provider>
     );

@@ -9,10 +9,22 @@ import {action as editStockAction} from "./pages/EditStock.jsx";
 import {action as deleteStockAction} from "./pages/DeleteStock.jsx";
 import {action as profileAction} from "./pages/Profile.jsx";
 import {loader as editStockLoader} from "./pages/EditStock.jsx";
+import stats, {loader as statsLoader} from "./pages/Stats.jsx";
 import Admin, {loader as adminLoader} from "./pages/Admin.jsx";
 import {loader as allStocksLoader} from "./components/AllStocks.jsx";
-import {AddStock, EditStock, DashboardLayout, Error, Register, Landing, HomeLayout, Login, Profile} from "./pages/index.js";
-import {AllStocks} from "./components/index.js";
+import {
+    AddStock,
+    EditStock,
+    DashboardLayout,
+    Error,
+    Register,
+    Landing,
+    HomeLayout,
+    Login,
+    Profile,
+    Stats
+} from "./pages/index.js";
+import {AllStocks, ErrorElement} from "./components/index.js";
 
 
 
@@ -35,6 +47,7 @@ const router = createBrowserRouter([{
         children: [
             {index: true, element: <AddStock/>, action: addAction},
             {path: "all-stocks", element: <AllStocks/>, loader: allStocksLoader},
+            {path: "stats", element: <Stats/>, loader: statsLoader, errorElement: <ErrorElement/>},
             {path: "edit-stock/:id",
                 element: <EditStock/>,
                 loader: editStockLoader,

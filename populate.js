@@ -8,8 +8,8 @@ import Stock from "./models/StockModel.js"
 
 try{
     await mongoose.connect(process.env.MONGO_URL)
-    const user = await User.findOne({email: "no@noemail.com"})
-    const jsonStocks = JSON.parse(await readFile(new URL("./utils/mockData.json", import.meta.url)))
+    const user = await User.findOne({email: "non@noemail.com"})
+    const jsonStocks = JSON.parse(await readFile(new URL("./utils/mockData2.json", import.meta.url)))
     const stocks = jsonStocks.map((stock)=> {
         return{...stock,createdBy:user._id}
     })

@@ -11,7 +11,7 @@ const NavLinks = ({isBigSidebar}) => {
                 const {role} = user
                 if (path === "admin" && role !== "admin") return
                 return (
-                    <NavLink to={path} key={text} className={"nav-link"} onClick={isBigSidebar ? null : toggleSidebar}>
+                    <NavLink to={path} key={text} className={"nav-link"} onClick={isBigSidebar ? null : toggleSidebar} end>
                         <span className={"icon"}>{icon}</span>
                         {text}
                     </NavLink>

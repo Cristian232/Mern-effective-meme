@@ -7,5 +7,6 @@ import Login from "./Login.jsx";
 import AddStock from "./AddStock.jsx";
 import EditStock from "./EditStock.jsx";
 import Profile from "./Profile.jsx";
+import Stats from "./Stats.jsx";
 
-export {DashboardLayout, Register, Error, Landing, HomeLayout, Login, AddStock, EditStock, Profile}
+export {DashboardLayout, Register, Error, Landing, HomeLayout, Login, AddStock, EditStock, Profile, Stats}
